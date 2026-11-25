@@ -239,6 +239,26 @@ for _, result := range suiteStatus.Results {
 }
 ```
 
+### Announcements
+
+Retrieve the system-wide announcements from Gatus:
+
+```go
+announcements, err := client.GetAnnouncements(ctx)
+if err != nil {
+    log.Fatal(err)
+}
+
+for _, announcement := range announcements {
+    if announcement.Archived {
+        continue
+    }
+    fmt.Printf("[%s] %s: %s\n", announcement.Type, announcement.Timestamp.Format(time.RFC3339), announcement.Message)
+}
+```
+
+Announcement types are available as constants: `AnnouncementTypeOutage`, `AnnouncementTypeWarning`, `AnnouncementTypeInformation`, `AnnouncementTypeOperational` and `AnnouncementTypeNone`.
+
 ## Complete Examples
 
 ### Example 1: Monitor Multiple Endpoints

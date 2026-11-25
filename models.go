@@ -96,3 +96,25 @@ type SuiteResult struct {
 	// EndpointResults contains the results of each endpoint check in the suite.
 	EndpointResults []EndpointResult `json:"endpointResults"`
 }
+
+// Announcement types supported by Gatus.
+const (
+	// AnnouncementTypeOutage represents a service outage.
+	AnnouncementTypeOutage = "outage"
+	// AnnouncementTypeWarning represents a warning or potential issue.
+	AnnouncementTypeWarning = "warning"
+	// AnnouncementTypeInformation represents general information.
+	AnnouncementTypeInformation = "information"
+	// AnnouncementTypeOperational represents operational status or resolved issues.
+	AnnouncementTypeOperational = "operational"
+	// AnnouncementTypeNone represents no specific type.
+	AnnouncementTypeNone = "none"
+)
+
+// Announcement represents a system-wide announcement from Gatus.
+type Announcement struct {
+	Timestamp time.Time `json:"timestamp"`
+	Type      string    `json:"type"`
+	Message   string    `json:"message"`
+	Archived  bool      `json:"archived,omitempty"`
+}
